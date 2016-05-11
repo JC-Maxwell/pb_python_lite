@@ -11,7 +11,7 @@ from app import sync as _Sync
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route("/signup", methods=['POST'])
 def signup():
 	params = json.loads(request.data)
 	username = params['username']
@@ -19,7 +19,7 @@ def signup():
 	signed_up = _Session.signup(username,password)
 	return json.dumps({'signed_up':signed_up})
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login", methods=['POST'])
 def login():
 	params = json.loads(request.data)
 	username = params['username']
@@ -34,7 +34,7 @@ def catalogs():
 	catalogs = _Sync.catalogs(token)
 	return json.dumps({'catalogs':catalogs})
 
-@app.route("/credentials", methods=['GET', 'POST'])
+@app.route("/credentials", methods=['POST'])
 def credentials():
 	params = json.loads(request.data)
 	token = params['token']
@@ -52,7 +52,7 @@ def status():
 	status = _Sync.status(token,id_site)
 	return json.dumps({'status':status})
 	
-@app.route("/accounts", methods=['GET', 'POST'])
+@app.route("/accounts")
 def accounts():
 	params = json.loads(request.data)
 	token = params['token']
@@ -60,7 +60,7 @@ def accounts():
 	site_accounts = _Sync.accounts(token,id_site)
 	return json.dumps({'accounts':site_accounts})
 
-@app.route("/transactions", methods=['GET', 'POST'])
+@app.route("/transactions")
 def transactions():
 	params = json.loads(request.data)
 	token = params['token']
