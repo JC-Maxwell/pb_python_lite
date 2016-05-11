@@ -1,3 +1,8 @@
+
+# Paybook Python Lite
+
+Before start remember you must put your own Paybook API Key at app/constants.py ... and configure your SQL DB path file/name if you wish \0/
+
 **Signup**
 ----
   Register a new user to Paybook
