@@ -1,12 +1,12 @@
 # -​*- coding: utf-8 -*​-import os
 
 import sqlite3
-from app import constants as _Constants
 import datetime
+from app import constants as _Constants
+from app import response as _Response
 
 connection = sqlite3.connect(_Constants.DB_PATH, check_same_thread=False)
 cur = connection.cursor()
-
 
 users_table_cmd = "SELECT name FROM sqlite_master WHERE type='table' AND name='users'"
 users_table_exist = cur.execute(users_table_cmd).fetchone()
@@ -45,6 +45,15 @@ class User():
 
 	def set_id_user(self,id_user):
 		self.id_user = id_user
+
+	def am_i_logged_in(self):
+		yes = False
+		if self.token is not None:
+			cur.execute('SELECT * FROM users WHERE token=?',(self.token,))
+		user = cur.fetchone()
+		if user is not None:
+			yes = True
+		return yes
 
 	def get_id_user(self):
 		if self.token is not None:
@@ -105,7 +114,8 @@ class Credentials():
 
 	def do_i_exist(self):
 		id_site = self.id_site
-		cur.execute('SELECT * FROM credentials WHERE id_site=?',(id_site,))
+		id_user = self.id_user
+		cur.execute('SELECT * FROM credentials WHERE id_user=? AND id_site=?',(id_user,id_site))
 		credentials = cur.fetchone()	
 		if credentials is not None:
 			return True
@@ -128,5 +138,17 @@ class Credentials():
 		twofa = credentials[3]
 		return twofa
 
+	def get_ws(self):
+		id_user = self.id_user
+		id_site = self.id_site
+		cur.execute('SELECT * FROM credentials WHERE id_user=? AND id_site=?',(id_user,id_site))
+		credentials = cur.fetchone()
+		ws = credentials[2]
+		return ws
 
-# 	
+
+
+
+
+
+
