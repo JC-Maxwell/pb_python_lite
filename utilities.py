@@ -1,7 +1,22 @@
-# -​*- coding: utf-8 -*​-import os
+# -​*- coding: utf-8 -*​-
 
+import logging
+from logging.handlers import TimedRotatingFileHandler
 from flask import json
 from flask import make_response
+
+def setup_logger(name):
+	file_name = name + '.log'
+	complete_file_name = './' + file_name
+	logging_level = logging.DEBUG
+	formatter = logging.Formatter('%(asctime)s - [%(levelname)s] - %(module)s - %(funcName)s:%(lineno)d - %(message)s','%Y-%m-%d %H:%M:%S')
+	formatter = logging.Formatter('%(message)s')		
+	logging_handler = TimedRotatingFileHandler(complete_file_name, when='midnight')
+	logging_handler.setFormatter(formatter)
+	logger = logging.getLogger(name)
+	logger.setLevel(logging_level)		
+	logger.addHandler(logging_handler)
+	return logger
 
 class Error(Exception):
 
@@ -41,4 +56,3 @@ def internal_server_error(e):
 	print 'Wops! Internal Server Error :('
 	print e
 	return Error('Internal Server Error',500).get_response()
-
