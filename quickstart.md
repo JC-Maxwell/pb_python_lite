@@ -15,7 +15,7 @@ El objetivo de este tutorial es implementar [Sync API](https://www.paybook.com/s
 
 Lo primero que tienes que hacer para sincronizar una institución por medio de Sync API es la gestión de usuarios. La estructura en Sync es la siguiente:
 
-->![alt tag](https://raw.githubusercontent.com/JC-Maxwell/pb_python_lite/master/lc_api.png)<-
+![alt tag](https://raw.githubusercontent.com/JC-Maxwell/pb_python_lite/master/sync_users.png)
 
 Es decir tu podrás registrar muchos usuarios por medio de tu **API_KEY** y, a su vez, cada uno de estos usuarios registrará cuentas de las instituciones que desea sincronizar. Al final todas las cuentas sincronizadas de cada una de las instituciones que un usuario dio de alta estarán ligadas a tu **API_KEY**.
 
@@ -25,7 +25,7 @@ Es decir tu podrás registrar muchos usuarios por medio de tu **API_KEY** y, a s
 <br>
 En este tutorial implementaremos [Sync API](https://www.paybook.com/syncdocs#api-Overview-Overview) por medio de la interfaz [cURL](https://curl.haxx.se/docs/manpage.html) desde la línea de comandos. La interacción entre tu terminal y el API se muestra a continuación:
 
-->![alt tag](../lc_api.png =500x250)<-
+![alt tag](https://raw.githubusercontent.com/JC-Maxwell/pb_python_lite/master/lc_api.png)
 
 En resumen, estaremos consumiendo los enpoints GET/POST/PUT/DELETE de [Sync API](https://www.paybook.com/syncdocs#api-Overview-Overview) a través de nuestra línea de comandos.
 
